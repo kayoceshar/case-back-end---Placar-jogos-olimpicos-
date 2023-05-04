@@ -12,3 +12,5 @@ export enum CompetitionStatus {
 export interface CompetitionDTO {
     name: string
 }
+
+
