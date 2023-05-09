@@ -6,3 +6,4 @@ export const competitionRouter = express.Router()
 const competitionController = new CompetitionController()
 
 competitionRouter.post('/create', competitionController.create);
+competitionRouter.put('/close', competitionController.close);

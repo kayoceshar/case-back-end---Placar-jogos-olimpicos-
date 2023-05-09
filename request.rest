@@ -4,7 +4,7 @@ POST http://localhost:3003/competition/create
 Content-Type: application/json
 
 {
-    "name": "Lançamento de Dardo"    
+    "name": "200m rasos"    
 }
 
 ### insert result
@@ -14,10 +14,27 @@ POST http://localhost:3003/results/insert
 Content-Type: application/json
 
 {
-    "competicao": "100m rasos",
-    "atleta": "Joao das Neves",
-    "value": 10.234,
-    "unidade": "s"   
+    "competicao": "Lançamento de Dardo",
+    "atleta": "João de Atlet",
+    "value": 78.43,
+    "unidade": "m"   
 }
 
+###ranking
+
+GET http://localhost:3003/results/ranking
+Content-Type: application/json
+
+{
+    "competicao": "100m rasos" 
+}
+
+###close
+
+PUT http://localhost:3003/competition/close
+Content-Type: application/json
+
+{
+    "name": "200m rasos" 
+}
 

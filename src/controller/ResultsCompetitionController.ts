@@ -20,4 +20,14 @@ export class ResultsCompetitionController {
             res.status(error.statusCode || 400).send(error.message || error.sqlMessage)
         }
     }
+
+    public rank = async (req: Request, res: Response) => {
+        try {
+            const competicao = req.body.competicao
+            const result = await resultsCompetitionBusiness.rank(competicao)
+            res.status(200).send(result)
+        } catch (error:any) {
+            res.status(error.statusCode || 400).send(error.message || error.sqlMessage)
+        }
+    }
 }
