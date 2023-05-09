@@ -20,4 +20,15 @@ export class CompetitionController {
             res.status(error.statusCode || 400).send(error.message || error.sqlMessage)
         }
     }
+
+    public close = async(req:Request, res: Response) => {
+        try {
+            const name = req.body.name
+            await competitionBusiness.close(name)
+            res.status(200).send({message: "Competition ended successfully!"})
+        } catch (error:any) {
+            res.status(error.statusCode || 400).send(error.message || error.sqlMessage)
+        }
+    }
+
 }                   

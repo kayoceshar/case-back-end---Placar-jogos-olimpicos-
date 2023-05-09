@@ -6,3 +6,4 @@ export const resultsCompetitionRouter = express.Router()
 const resultsCompetitionController = new ResultsCompetitionController()
 
 resultsCompetitionRouter.post('/insert', resultsCompetitionController.insertResult)
+resultsCompetitionRouter.get('/ranking', resultsCompetitionController.rank)

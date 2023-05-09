@@ -16,5 +16,31 @@ export class ResultsCompetitionDataBase extends BaseDatabase{
     }
 
 
+    public rankRace = async(competicao: string) => {
+        try {
+           const result = await ResultsCompetitionDataBase.connection(this.table)
+           .select('competicao','atleta','value','unidade')
+           .where('competicao', '=', competicao)
+           .orderBy('value','asc')
+           return result
+        } catch (error:any) {
+            throw new CustomError(400, error.message);
+        }
+    }
+
+    public rankDart = async(competicao: string) => {
+        try {
+            const result = await ResultsCompetitionDataBase.connection(this.table)
+            .select('competicao','atleta','value','unidade')
+            .where('competicao', '=', competicao)
+            .orderBy('value','desc')
+            return result  
+        } catch (error:any) {
+            throw new CustomError(400, error.message);
+        }
+    }
+
+
+
 
 }

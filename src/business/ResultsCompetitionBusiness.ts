@@ -70,4 +70,36 @@ export class ResultsCompetitionBusiness{
             throw new CustomError(400, error.message);
         }
     }
+
+    public rank = async (competicao: string) => {
+        try {
+
+            if(!competicao){
+                throw new CompeticaoNotFound();
+            }
+
+            const allCompetitions =  await competitionDataBase.getAllCompetitions()
+            const getCompetition = allCompetitions.find(competition => competition.name === competicao)
+
+            if(!getCompetition){
+                throw new NoExistingCompetition()
+            }
+
+
+            if(competicao === '100m rasos'){
+                const result = await resultsCompetitionDataBase.rankRace(competicao)
+                return result
+            }else {
+                const result = await resultsCompetitionDataBase.rankDart(competicao)
+                return result
+            }
+
+            
+        } catch (error:any) {
+            throw new CustomError(400, error.message);
+        }
+    }
+
+
+
 }
