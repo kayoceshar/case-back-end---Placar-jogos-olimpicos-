@@ -1,11 +1,12 @@
 import { CompetitionBaseDatabase } from "../data/CompetitionDataBase";
 import { ResultsCompetitionDataBase } from "../data/ResultsCompetitionDataBase";
 import { CustomError } from "../error/CustomError";
-import { AtletaNotFound, CompeticaoNotFound, InvalidCompetition, InvalidUnidade, InvalidValue, NameNotFound, NoExistingCompetition, UnidadeNotFound, ValueNotFound } from "../error/competitionErrors";
+import { AtletaNotFound, Attempts, CompeticaoNotFound, ExistingCompetitionRace, InvalidCompetition, InvalidUnidade, InvalidValue, NameNotFound, NoExistingCompetition, UnidadeNotFound, ValueNotFound } from "../error/competitionErrors";
 import { CompetitionStatus } from "../model/competition";
 import { resultInputDTO } from "../model/resultsCompetition";
 import { IdGenerator } from "../services/IdGenerator";
 import { result } from "../model/resultsCompetition";
+import { log } from "console";
 
 
 const competitionDataBase = new CompetitionBaseDatabase()
@@ -23,6 +24,8 @@ export class ResultsCompetitionBusiness{
 
             const allCompetitions =  await competitionDataBase.getAllCompetitions()
             const getCompetition = allCompetitions.find(competition => competition.name === competicao)
+
+                        
 
             if(!getCompetition){
                 throw new NoExistingCompetition()
@@ -51,6 +54,26 @@ export class ResultsCompetitionBusiness{
             if(unidade.toUpperCase() != "S" && unidade.toUpperCase() != "M"){
                 throw new InvalidUnidade();
             }
+
+            const allResults = await resultsCompetitionDataBase.getAllResults()
+            const getResult = allResults.find(result => result.atleta === atleta);       
+            
+            let counter = 0;
+            
+            for (let i = 0; i < allResults.length; i++) {
+              if (allResults[i].atleta === atleta) counter++;
+            }
+            
+            if(counter > 3){
+                throw new Attempts();
+            }
+          
+
+            if(competicao === '100m rasos' && getResult){
+                throw new ExistingCompetitionRace()
+            }
+
+
 
             const id: string = idGenerator.generateId()
             const competition_id = getCompetition.id
@@ -85,7 +108,7 @@ export class ResultsCompetitionBusiness{
                 throw new NoExistingCompetition()
             }
 
-
+           
             if(competicao === '100m rasos'){
                 const result = await resultsCompetitionDataBase.rankRace(competicao)
                 return result

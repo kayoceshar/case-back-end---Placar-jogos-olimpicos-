@@ -57,3 +57,20 @@ export class InvalidValue extends CustomError{
         super(404, "The value must be a number.")
     }
 }
+
+export class ExistingCompetitionRace extends CustomError{
+    constructor(){
+        super(404, "There is already a result for this athlete.")
+    }
+}
+
+export class Attempts extends CustomError{
+    constructor(){
+        super(404, "The Atletla can only record up to three attempts for darts.")
+    }
+}
+
+
+
+
+
