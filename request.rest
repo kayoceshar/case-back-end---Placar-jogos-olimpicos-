@@ -15,8 +15,8 @@ Content-Type: application/json
 
 {
     "competicao": "Lançamento de Dardo",
-    "atleta": "João de Atlet",
-    "value": 78.43,
+    "atleta": "Kayo",
+    "value": 100.5,
     "unidade": "m"   
 }
 
@@ -26,7 +26,7 @@ GET http://localhost:3003/results/ranking
 Content-Type: application/json
 
 {
-    "competicao": "100m rasos" 
+    "competicao": "Lançamento de Dardo" 
 }
 
 ###close

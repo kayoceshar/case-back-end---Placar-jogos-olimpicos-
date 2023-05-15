@@ -28,11 +28,16 @@ export class ResultsCompetitionDataBase extends BaseDatabase{
         }
     }
 
+    
+
     public rankDart = async(competicao: string) => {
         try {
             const result = await ResultsCompetitionDataBase.connection(this.table)
-            .select('competicao','atleta','value','unidade')
+            .select('competicao','atleta')
+            .max('value as value')
+            .select('unidade')           
             .where('competicao', '=', competicao)
+            .groupBy('atleta','unidade')
             .orderBy('value','desc')
             return result  
         } catch (error:any) {
@@ -41,6 +46,13 @@ export class ResultsCompetitionDataBase extends BaseDatabase{
     }
 
 
-
+    public getAllResults = async() => {
+        try {
+            const result = await ResultsCompetitionDataBase.connection(this.table)
+            return result
+        } catch (error:any) {
+            throw new CustomError(400, error.message); 
+        }
+    }
 
 }
