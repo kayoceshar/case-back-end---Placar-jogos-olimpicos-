@@ -1,12 +1,13 @@
+import { ResultsRepository } from "../business/ResultsRepository";
 import { CustomError } from "../error/CustomError";
-import { result } from "../model/resultsCompetition";
+import { Result, ResultInputDTO } from "../model/resultsCompetition";
 import { BaseDatabase } from "./BaseDataBase";
 
-export class ResultsCompetitionDataBase extends BaseDatabase{
+export class ResultsCompetitionDataBase extends BaseDatabase implements ResultsRepository {
     private table = 'Competition_results'
 
 
-    public insertResult =  async(result: result) => {
+    public insertResult =  async(result: Result):Promise<void> => {
         try {
           await ResultsCompetitionDataBase.connection(this.table)
           .insert(result)  
@@ -16,7 +17,7 @@ export class ResultsCompetitionDataBase extends BaseDatabase{
     }
 
 
-    public rankRace = async(competicao: string) => {
+    public rankRace = async(competicao: string):Promise<ResultInputDTO[]> => {
         try {
            const result = await ResultsCompetitionDataBase.connection(this.table)
            .select('competicao','atleta','value','unidade')
@@ -30,7 +31,7 @@ export class ResultsCompetitionDataBase extends BaseDatabase{
 
     
 
-    public rankDart = async(competicao: string) => {
+    public rankDart = async(competicao: string):Promise<ResultInputDTO[]>  => {
         try {
             const result = await ResultsCompetitionDataBase.connection(this.table)
             .select('competicao','atleta')
@@ -46,7 +47,7 @@ export class ResultsCompetitionDataBase extends BaseDatabase{
     }
 
 
-    public getAllResults = async() => {
+    public getAllResults = async():Promise<Result[]> => {
         try {
             const result = await ResultsCompetitionDataBase.connection(this.table)
             return result

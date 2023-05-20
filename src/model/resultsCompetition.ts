@@ -1,4 +1,4 @@
-export type result = {
+export type Result = {
     id:string;
     competicao: string;
     atleta: string;
@@ -7,7 +7,7 @@ export type result = {
     competition_id: string;
 }
 
-export interface resultInputDTO {
+export interface ResultInputDTO {
     competicao: string;
     atleta: string;
     value: number;

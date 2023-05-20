@@ -2,17 +2,17 @@ import { Request, Response } from "express";
 import { CompetitionDTO } from "../model/competition";
 import { CompetitionBusiness } from "../business/CompetitionBusiness";
 
-const competitionBusiness = new CompetitionBusiness()
+
 
 export class CompetitionController {
+    constructor(
+        private competitionBusiness: CompetitionBusiness
+    ){}
     public create = async(req:Request, res: Response) => {
         try {
-
-            const input: CompetitionDTO = {
-                name: req.body.name
-            }
+            const name = req.body.name        
             
-            await competitionBusiness.create(input)
+            await this.competitionBusiness.create(name)
             res.status(200).send({message: "Competition Created!"})
 
 
@@ -24,7 +24,7 @@ export class CompetitionController {
     public close = async(req:Request, res: Response) => {
         try {
             const name = req.body.name
-            await competitionBusiness.close(name)
+            await this.competitionBusiness.close(name)
             res.status(200).send({message: "Competition ended successfully!"})
         } catch (error:any) {
             res.status(error.statusCode || 400).send(error.message || error.sqlMessage)

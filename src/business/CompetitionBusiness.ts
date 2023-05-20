@@ -1,34 +1,36 @@
-import { CompetitionBaseDatabase } from "../data/CompetitionDataBase";
 import { CustomError } from "../error/CustomError";
 import { NameNotFound, NoExistingCompetition } from "../error/competitionErrors";
-import { CompetitionDTO, competition} from "../model/competition";
-import { IdGenerator } from "../services/IdGenerator";
+import { competition} from "../model/competition";
+import { CompetitionRepository } from "./CompetitionRepository";
+import { IIdGenerator } from "./ports";
 
 
-const idGenerator = new IdGenerator()
-const competitionDataBase =  new CompetitionBaseDatabase
+
 
 
 export class CompetitionBusiness {
-    public create = async(input: CompetitionDTO) => {
+    constructor(
+        private competitionDataBase: CompetitionRepository,
+        private idGenerator: IIdGenerator,
+    ){}
+    public create = async(name:string) => {
         try {
             
-        const {name} = input;
-
+        
         if(!name){
             throw new NameNotFound()
         }
 
-        const id = idGenerator.generateId()
+        const id = this.idGenerator.generateId()
 
         const competition: competition = {
             id,
             name
         }
 
-        await competitionDataBase.create(competition)
+        await this.competitionDataBase.create(competition)
         } catch (error:any) {
-            throw new CustomError(400, error.message);
+            throw new CustomError(error.statusCode, error.message);
         }
     }
 
@@ -38,21 +40,18 @@ export class CompetitionBusiness {
                 throw new NameNotFound()
             }
 
-            const allCompetitions =  await competitionDataBase.getAllCompetitions()
+            const allCompetitions =  await this.competitionDataBase.getAllCompetitions()
             const getCompetition = allCompetitions.find(competition => competition.name === name)
 
             if(!getCompetition){
                 throw new NoExistingCompetition()
             }
 
-            await competitionDataBase.close(name)
+            await this.competitionDataBase.close(name)
         } catch (error:any) {
-            throw new CustomError(400, error.message);
+            throw new CustomError(error.statusCode, error.message);
         }
 
     }
-
-
-
     
 }

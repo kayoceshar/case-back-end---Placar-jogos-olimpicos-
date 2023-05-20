@@ -1,11 +1,12 @@
+import { CompetitionRepository } from "../business/CompetitionRepository";
 import { CustomError } from "../error/CustomError";
 import { CompetitionStatus, competition } from "../model/competition";
 import { BaseDatabase } from "./BaseDataBase";
 
-export class CompetitionBaseDatabase extends BaseDatabase{
+export class CompetitionBaseDatabase extends BaseDatabase implements CompetitionRepository {
     private table = 'Competition'
 
-    public create = async (competition: competition) => {
+    public create = async (competition: competition):Promise<void> => {
         try {
            await CompetitionBaseDatabase.connection(this.table)
            .insert(competition) 
@@ -14,12 +15,12 @@ export class CompetitionBaseDatabase extends BaseDatabase{
         }
     }
 
-    getAllCompetitions = async () => {
+    public getAllCompetitions = async ():Promise<competition[]> => {
         const result = await CompetitionBaseDatabase.connection(this.table)
         return result
     }
 
-    public close = async(name:string)=> {
+    public close = async(name:string):Promise<void> => {
         try {
             await CompetitionBaseDatabase.connection
             .update({status:CompetitionStatus.CLOSED})

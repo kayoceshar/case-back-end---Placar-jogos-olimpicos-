@@ -4,6 +4,16 @@ export type competition = {
     status?: string
 }
 
+export class Competition {
+    constructor(
+        private id: string,
+        private name: string
+    ){}
+}
+
+
+
+
 export enum CompetitionStatus {
     OPEN = 'OPEN',
     CLOSED = 'CLOSED'
