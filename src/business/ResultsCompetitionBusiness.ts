@@ -1,20 +1,21 @@
-import { CompetitionBaseDatabase } from "../data/CompetitionDataBase";
-import { ResultsCompetitionDataBase } from "../data/ResultsCompetitionDataBase";
 import { CustomError } from "../error/CustomError";
 import { AtletaNotFound, Attempts, CompeticaoNotFound, ExistingCompetitionRace, InvalidCompetition, InvalidUnidade, InvalidValue, NameNotFound, NoExistingCompetition, UnidadeNotFound, ValueNotFound } from "../error/competitionErrors";
 import { CompetitionStatus } from "../model/competition";
-import { resultInputDTO } from "../model/resultsCompetition";
-import { IdGenerator } from "../services/IdGenerator";
-import { result } from "../model/resultsCompetition";
-import { log } from "console";
+import { ResultInputDTO } from "../model/resultsCompetition";
+import { Result } from "../model/resultsCompetition";
+import { CompetitionRepository } from "./CompetitionRepository";
+import { IIdGenerator } from "./ports";
+import { ResultsRepository } from "./ResultsRepository";
 
 
-const competitionDataBase = new CompetitionBaseDatabase()
-const resultsCompetitionDataBase = new ResultsCompetitionDataBase()
-const idGenerator = new IdGenerator()
 
 export class ResultsCompetitionBusiness{
-    public insertResults = async(input: resultInputDTO) => {
+    constructor(
+        private competitionDataBase: CompetitionRepository,
+        private resultsCompetitionDataBase: ResultsRepository,
+        private idGenerator: IIdGenerator
+    ){}
+    public insertResults = async(input: ResultInputDTO) => {
         try {
             const {competicao, atleta, value, unidade} = input
 
@@ -22,7 +23,7 @@ export class ResultsCompetitionBusiness{
                 throw new CompeticaoNotFound();
             }
 
-            const allCompetitions =  await competitionDataBase.getAllCompetitions()
+            const allCompetitions =  await this.competitionDataBase.getAllCompetitions()
             const getCompetition = allCompetitions.find(competition => competition.name === competicao)
 
                         
@@ -55,7 +56,7 @@ export class ResultsCompetitionBusiness{
                 throw new InvalidUnidade();
             }
 
-            const allResults = await resultsCompetitionDataBase.getAllResults()
+            const allResults = await this.resultsCompetitionDataBase.getAllResults()
             const getResult = allResults.find(result => result.atleta === atleta);       
             
             let counter = 0;
@@ -75,10 +76,10 @@ export class ResultsCompetitionBusiness{
 
 
 
-            const id: string = idGenerator.generateId()
+            const id: string = this.idGenerator.generateId()
             const competition_id = getCompetition.id
 
-            const result:result = {
+            const result:Result = {
                 id,
                 competicao,
                 atleta,
@@ -87,10 +88,10 @@ export class ResultsCompetitionBusiness{
                 competition_id
             }
 
-            await resultsCompetitionDataBase.insertResult(result)
+            await this.resultsCompetitionDataBase.insertResult(result)
             
         } catch (error:any) {
-            throw new CustomError(400, error.message);
+            throw new CustomError(error.statusCode, error.message);
         }
     }
 
@@ -101,7 +102,7 @@ export class ResultsCompetitionBusiness{
                 throw new CompeticaoNotFound();
             }
 
-            const allCompetitions =  await competitionDataBase.getAllCompetitions()
+            const allCompetitions =  await this.competitionDataBase.getAllCompetitions()
             const getCompetition = allCompetitions.find(competition => competition.name === competicao)
 
             if(!getCompetition){
@@ -110,19 +111,16 @@ export class ResultsCompetitionBusiness{
 
            
             if(competicao === '100m rasos'){
-                const result = await resultsCompetitionDataBase.rankRace(competicao)
+                const result = await this.resultsCompetitionDataBase.rankRace(competicao)
                 return result
             }else {
-                const result = await resultsCompetitionDataBase.rankDart(competicao)
+                const result = await this.resultsCompetitionDataBase.rankDart(competicao)
                 return result
             }
 
             
         } catch (error:any) {
-            throw new CustomError(400, error.message);
+            throw new CustomError(error.statusCode, error.message);
         }
     }
-
-
-
 }
