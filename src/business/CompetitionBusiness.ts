@@ -28,7 +28,11 @@ export class CompetitionBusiness {
             name
         }
 
+        
+
         await this.competitionDataBase.create(competition)
+
+        
         } catch (error:any) {
             throw new CustomError(error.statusCode, error.message);
         }

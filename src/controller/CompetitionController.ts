@@ -12,9 +12,12 @@ export class CompetitionController {
         try {
             const name = req.body.name        
             
-            await this.competitionBusiness.create(name)
-            res.status(200).send({message: "Competition Created!"})
-
+           await this.competitionBusiness.create(name)
+           
+                     
+           res.status(200).send({message: "Competition Created!"})
+            
+            
 
         } catch (error:any) {
             res.status(error.statusCode || 400).send(error.message || error.sqlMessage)
