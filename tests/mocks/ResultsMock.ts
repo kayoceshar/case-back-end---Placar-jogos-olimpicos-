@@ -15,6 +15,22 @@ export const resultsMock: Result[] = [{
     value: 100.5,
     unidade: "m",
     competition_id: "id22"
+},
+{
+    id: "id3",
+    competicao: "Lançamento de Dardo",
+    atleta: "Felipe",
+    value: 100.5,
+    unidade: "m",
+    competition_id: "id22"
+},
+{
+    id: "id4",
+    competicao: "Lançamento de Dardo",
+    atleta: "Felipe",
+    value: 100.5,
+    unidade: "m",
+    competition_id: "id22"
 }
 ]
 

@@ -23,8 +23,8 @@ describe('testes create', () => {
 
    test("Teste 2: Sucesso na criação da competição",async () => {
             
-         await competitionBusiness.create("100m rasos")      
-         expect(200).toBe(200)   
+        const result = await competitionBusiness.create("100m rasos")      
+         expect(result).not.toBeDefined()
      
    })
 
@@ -56,8 +56,8 @@ describe('testes close', () => {
 
 test("Teste 3: Sucesso em encerrar a competição",async () => {
             
-      await competitionBusiness.close("100m rasos")      
-      expect(200).toBe(200)   
+     const result = await competitionBusiness.close("100m rasos")      
+      expect(result).not.toBeDefined()  
   
 }) 
 
