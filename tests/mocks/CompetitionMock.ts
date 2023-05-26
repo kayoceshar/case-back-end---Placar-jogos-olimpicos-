@@ -6,7 +6,12 @@ export const competitionMock = [{
 },
 {
     id: "id2",
-    name: "Lançamento de dardo",
+    name: "Lançamento de Dardo",
     status: "OPEN"
+},
+{
+    id: "id3",
+    name: "Corrida",
+    status: "CLOSED"
 }
 ]

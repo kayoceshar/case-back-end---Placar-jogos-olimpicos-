@@ -15,7 +15,7 @@ export class ResultsCompetitionBusiness{
         private resultsCompetitionDataBase: ResultsRepository,
         private idGenerator: IIdGenerator
     ){}
-    public insertResults = async(input: ResultInputDTO) => {
+    public insertResults = async(input:any) => {
         try {
             const {competicao, atleta, value, unidade} = input
 
