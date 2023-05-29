@@ -25,8 +25,8 @@ describe('testes inserir resultados', () => {
           await resultBusiness.insertResults(input)
        }catch (error:any) {  
           expect(error).toBeInstanceOf(CustomError)
-          expect(error.statusCode).toBe(404)
-          expect(error.message).toBe("Competition name not found.")   
+          expect(error.statusCode).toBe(422)
+          expect(error.message).toBe("It is necessary to inform the name of the competition.")   
       }
     })
 
@@ -63,7 +63,7 @@ describe('testes inserir resultados', () => {
            await resultBusiness.insertResults(input)
         }catch (error:any) {  
            expect(error).toBeInstanceOf(CustomError)
-           expect(error.statusCode).toBe(404)
+           expect(error.statusCode).toBe(422)
            expect(error.message).toBe("It is not possible to add the result to an already closed competition.")   
        }
      })
@@ -82,8 +82,8 @@ describe('testes inserir resultados', () => {
            await resultBusiness.insertResults(input)
         }catch (error:any) {  
            expect(error).toBeInstanceOf(CustomError)
-           expect(error.statusCode).toBe(404)
-           expect(error.message).toBe("Atleta name not found.")   
+           expect(error.statusCode).toBe(422)
+           expect(error.message).toBe("It is necessary to inform the name of the athlete.")   
        }
      })
 
@@ -101,8 +101,8 @@ describe('testes inserir resultados', () => {
            await resultBusiness.insertResults(input)
         }catch (error:any) {  
            expect(error).toBeInstanceOf(CustomError)
-           expect(error.statusCode).toBe(404)
-           expect(error.message).toBe("Value not found.")   
+           expect(error.statusCode).toBe(422)
+           expect(error.message).toBe("It is necessary to inform the value of the athlete's result.")   
        }
      })
 
@@ -120,12 +120,12 @@ describe('testes inserir resultados', () => {
            await resultBusiness.insertResults(input)
         }catch (error:any) {  
            expect(error).toBeInstanceOf(CustomError)
-           expect(error.statusCode).toBe(404)
+           expect(error.statusCode).toBe(422)
            expect(error.message).toBe("The value must be a number.")   
        }
      })
 
-     test("Teste 7: Erro que deve retornar quando o valor da unidade estiver em branco.",async () => {
+     test("Teste 7: Erro que deve retornar quando o valor da unidade estiver vazio.",async () => {
         expect.assertions(3)
         
         const input = {
@@ -139,8 +139,8 @@ describe('testes inserir resultados', () => {
            await resultBusiness.insertResults(input)
         }catch (error:any) {  
            expect(error).toBeInstanceOf(CustomError)
-           expect(error.statusCode).toBe(404)
-           expect(error.message).toBe("Unidade name not found.")   
+           expect(error.statusCode).toBe(422)
+           expect(error.message).toBe("It is necessary to inform the unit")   
        }
      })
      
@@ -158,7 +158,7 @@ describe('testes inserir resultados', () => {
            await resultBusiness.insertResults(input)
         }catch (error:any) {  
            expect(error).toBeInstanceOf(CustomError)
-           expect(error.statusCode).toBe(404)
+           expect(error.statusCode).toBe(422)
            expect(error.message).toBe("The unit needs either s(seconds) or m(meters).")   
        }
      })
@@ -178,7 +178,7 @@ describe('testes inserir resultados', () => {
            await resultBusiness.insertResults(input)
         }catch (error:any) {  
            expect(error).toBeInstanceOf(CustomError)
-           expect(error.statusCode).toBe(404)
+           expect(error.statusCode).toBe(409)
            expect(error.message).toBe("There is already a result for this athlete.")   
        }
      })
@@ -207,11 +207,11 @@ describe('testes inserir resultados', () => {
         const competicao = ""
         
         try{
-           await resultBusiness.rank("")
+           await resultBusiness.rank(competicao)
         }catch (error:any) {  
            expect(error).toBeInstanceOf(CustomError)
-           expect(error.statusCode).toBe(404)
-           expect(error.message).toBe("Competition name not found.")   
+           expect(error.statusCode).toBe(422)
+           expect(error.message).toBe("It is necessary to inform the name of the competition.")   
        }
      })
 

@@ -1,8 +1,7 @@
 import { CustomError } from "../error/CustomError";
 import { AtletaNotFound, Attempts, CompeticaoNotFound, ExistingCompetitionRace, InvalidCompetition, InvalidUnidade, InvalidValue, NameNotFound, NoExistingCompetition, UnidadeNotFound, ValueNotFound } from "../error/competitionErrors";
 import { CompetitionStatus } from "../model/competition";
-import { ResultInputDTO } from "../model/resultsCompetition";
-import { Result } from "../model/resultsCompetition";
+import { result } from "../model/resultsCompetition";
 import { CompetitionRepository } from "./CompetitionRepository";
 import { IIdGenerator } from "./ports";
 import { ResultsRepository } from "./ResultsRepository";
@@ -79,7 +78,7 @@ export class ResultsCompetitionBusiness{
             const id: string = this.idGenerator.generateId()
             const competition_id = getCompetition.id
 
-            const result:Result = {
+            const result:result = {
                 id,
                 competicao,
                 atleta,
