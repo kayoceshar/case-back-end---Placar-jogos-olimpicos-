@@ -31,7 +31,7 @@ export class ResultsCompetitionDataBase extends BaseDatabase implements ResultsR
 
     
 
-    public rankDart = async(competicao: string):Promise<ResultInputDTO[]>  => {
+    public rankDart = async(competicao: string):Promise<any>  => {
         try {
             const result = await ResultsCompetitionDataBase.connection(this.table)
             .select('competicao','atleta')
