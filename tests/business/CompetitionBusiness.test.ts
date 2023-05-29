@@ -16,8 +16,8 @@ describe('testes create', () => {
          await competitionBusiness.create("")
       }catch (error:any) {  
          expect(error).toBeInstanceOf(CustomError)
-         expect(error.statusCode).toBe(404)
-         expect(error.message).toBe("Competition name not found.")   
+         expect(error.statusCode).toBe(422)
+         expect(error.message).toBe("It is necessary to inform the name of the competition.")   
      }
    })
 
@@ -38,8 +38,8 @@ describe('testes close', () => {
          await competitionBusiness.close("")
       }catch (error:any) {  
          expect(error).toBeInstanceOf(CustomError)
-         expect(error.statusCode).toBe(404)
-         expect(error.message).toBe("Competition name not found.")   
+         expect(error.statusCode).toBe(422)
+         expect(error.message).toBe("It is necessary to inform the name of the competition.")   
      }
    })
 

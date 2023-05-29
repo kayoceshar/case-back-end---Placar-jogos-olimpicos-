@@ -1,4 +1,4 @@
-export type Result = {
+export type result = {
     id:string;
     competicao: string;
     atleta: string;

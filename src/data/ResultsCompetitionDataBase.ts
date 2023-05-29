@@ -1,13 +1,13 @@
 import { ResultsRepository } from "../business/ResultsRepository";
 import { CustomError } from "../error/CustomError";
-import { Result, ResultInputDTO } from "../model/resultsCompetition";
+import { result, ResultInputDTO } from "../model/resultsCompetition";
 import { BaseDatabase } from "./BaseDataBase";
 
 export class ResultsCompetitionDataBase extends BaseDatabase implements ResultsRepository {
     private table = 'Competition_results'
 
 
-    public insertResult =  async(result: Result):Promise<void> => {
+    public insertResult =  async(result: result):Promise<void> => {
         try {
           await ResultsCompetitionDataBase.connection(this.table)
           .insert(result)  
@@ -47,7 +47,7 @@ export class ResultsCompetitionDataBase extends BaseDatabase implements ResultsR
     }
 
 
-    public getAllResults = async():Promise<Result[]> => {
+    public getAllResults = async():Promise<result[]> => {
         try {
             const result = await ResultsCompetitionDataBase.connection(this.table)
             return result
