@@ -49,5 +49,9 @@ Esse produto nada mais é do que uma rede social, na qual os usuários podem div
     
     - ### **👨‍💻 Link Render** 
     
+    https://placar-jogos-olimpicos.onrender.com
+    
      - ### **👨‍💻 Documentação Postman** 
+     
+     https://documenter.getpostman.com/view/23251344/2s93mBvJNc
 
