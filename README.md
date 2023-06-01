@@ -1,4 +1,8 @@
-Teste prático da EstanteVirtual
+# Teste prático da EstanteVirtual
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#table-of-contents)
+
+## Jogos Olímpicos
 
 Enunciado:
 
@@ -9,49 +13,54 @@ Com a chegada dos jogos olímpicos, fomos designados para construir uma API REST
 Lançamento de Dardo: Maior distância vence
 
 
+Detalhes:
+A API não deve aceitar cadastros de resultados se a competição já estiver encerrada.
+A API pode retornar o ranking/resultado parcial, caso a disputa ainda não estiver encerrada.
+No caso da competição do lançamento de dardos, cada atleta terá 3 chances, e o resultado da competição deverá levar em conta o lançamento mais distante de cada atleta.
+
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#table-of-contents)
 
 
 🎯 EndPoints 
-Esse produto nada mais é do que uma rede social, na qual os usuários podem dividir informações relevantes sobre comidas e receitas que tenham experimentado. Ela possui todas as funcionalidades mais comuns em redes sociais:
 
- 1. **Cadastro / Criar Pessoa Usuária**  
+
+ 1. **Criar uma competição**  
     
- 2. **Login**
+ 2. **Cadastrar resultados para uma competição**
         
- 3. **Informações do próprio perfil**
+ 3. **Finalizar uma competição**
     
-🥄 4. **Criar receitas**
+ 4. **Retornar o ranking da competição, exibindo a posição final de cada atleta**
     
  
 
     
-    - ### **👨‍💻 Tecnologias Utilizadas**
+ - ### **👨‍💻 Tecnologias Utilizadas**
     	
-	- Typescript
-	- Node.js
-	- MySQL
-	- Express.js
-	- Knex.js
+- Typescript
+- Node.js
+- MySQL
+- Express.js
+- Knex.js
 	
-	- Para Rodar o projeto:
-	- git clone https://github.com/kayoceshar/Cookenu.git
-	- npm install
-	- criar um arquivo .env com as informações do seus banco de dados
-	- variáveis do arquivo .env:
+- ### Para Rodar o projeto:
+- git clone https://github.com/kayoceshar/Cookenu.git
+- npm install
+- criar um arquivo .env com as informações do seus banco de dados
+- variáveis do arquivo .env:
 	DB_HOST: ,
    	DB_USER: ,
     	DB_PASSWORD: ,
     	DB_DATABASE: ,
-	- executar as queries do arquivo queries.sql para criar as tabelas
-	- npm run dev -> para rodar o servidor
+- executar as queries do arquivo queries.sql para criar as tabelas
+- npm run dev -> para rodar o servidor
     
-    - ### **👨‍💻 Link Render** 
+- ### **👨‍💻 Link Render** 
     
-    https://placar-jogos-olimpicos.onrender.com
+  <p>Confira o <a href="https://placar-jogos-olimpicos.onrender.com" target="_blank">Render</a>.</p>
     
-     - ### **👨‍💻 Documentação Postman** 
+- ### **👨‍💻 Documentação Postman** 
      
-     https://documenter.getpostman.com/view/23251344/2s93mBvJNc
+  <p>Confira o <a href="https://documenter.getpostman.com/view/23251344/2s93mBvJNc" target="_blank">Documentação</a>.</p>
 
