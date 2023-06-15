@@ -45,7 +45,7 @@ No caso da competição do lançamento de dardos, cada atleta terá 3 chances, e
 - Knex.js
 	
 - ### Para Rodar o projeto:
-- git clone https://github.com/kayoceshar/Cookenu.git
+- git clone https://github.com/kayoceshar/case-back-end-Placar-jogos-olimpicos-.git
 - npm install
 - criar um arquivo .env com as informações do seus banco de dados
 - variáveis do arquivo .env:
